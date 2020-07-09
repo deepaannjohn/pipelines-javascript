@@ -23,10 +23,8 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
-    contents: '**/$(BuildConfiguration)/**'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
+    targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
