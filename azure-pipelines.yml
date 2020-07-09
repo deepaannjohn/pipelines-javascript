@@ -21,7 +21,7 @@ steps:
   displayName: 'npm install and build'
 
 
-- task: ArchiveFiles@2
+- task: PublishBuildArtifacts@1
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    includeRootFolder: false
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
