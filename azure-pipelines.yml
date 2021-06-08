@@ -30,10 +30,20 @@ jobs:
           echo 'All test cases passes'
         displayName: 'Unit test'
   
-  - deployment: deploy
+  - deployment: deployToDev
+    displayName: 'Deploy Dev'
     environment: Dev
     strategy:
       runOnce:
         deploy:
           steps:
             - script: echo Deployed to Dev
+  
+  - deployment: deployToprod
+    displayName: 'Deploy Prod'
+    environment: Prod
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo Deployed to Prod
