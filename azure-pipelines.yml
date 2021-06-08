@@ -27,17 +27,16 @@ stages:
             artifactName: MyBuildOutputs
     
   - stage: test
+    dependsOn: build
     displayName: 'Test'
     jobs:
       - job: test
-        dependsOn: build
         steps:
           - script: 
               echo 'All test cases passes'
             displayName: 'Unit test'
       
       - deployment: deployToDev
-        dependsOn: test
         displayName: 'Deploy Dev'
         environment: Dev
         strategy:
@@ -48,11 +47,11 @@ stages:
     
 
   - stage: deploy
+    dependsOn: test
     displayName: 'Deploy'
     jobs:
       - deployment: deployToprod
         displayName: 'Deploy Prod'
-        dependsOn: deployToDev
         environment: Prod
         strategy:
           runOnce:
