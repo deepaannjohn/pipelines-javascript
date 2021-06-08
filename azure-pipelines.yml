@@ -23,8 +23,17 @@ jobs:
           pathToPublish: $(Build.ArtifactStagingDirectory)
           artifactName: MyBuildOutputs
 
-  - job: deploy
+  - job: test
+    dependsOn: build
     steps:
       - script: 
-          echo hello
-        displayName: 'Deploy to Dev'
+          echo 'All test cases passes'
+        displayName: 'Unit test'
+  
+  - deployment: deploy
+    environment: Dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo Deployed to Dev
