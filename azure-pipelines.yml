@@ -1,51 +1,61 @@
 trigger:
 - master
 
-jobs:
-  - job: build
-    steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.x'
-        displayName: 'Install Node.js'
+stages:
+  - stage: build
+    displayName: 'Build'
+    jobs:
+    - job: build
+      steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '10.x'
+          displayName: 'Install Node.js'
 
-      - script: |
-          npm install
-          npm run build
-        displayName: 'npm install and build'
+        - script: |
+            npm install
+            npm run build
+          displayName: 'npm install and build'
 
 
-      - task: CopyFiles@2
-        inputs:
-          targetFolder: $(Build.ArtifactStagingDirectory)
-      - task: PublishBuildArtifacts@1
-        inputs:
-          pathToPublish: $(Build.ArtifactStagingDirectory)
-          artifactName: MyBuildOutputs
+        - task: CopyFiles@2
+          inputs:
+            targetFolder: $(Build.ArtifactStagingDirectory)
+        - task: PublishBuildArtifacts@1
+          inputs:
+            pathToPublish: $(Build.ArtifactStagingDirectory)
+            artifactName: MyBuildOutputs
+    
+  - stage: test
+    displayName: 'Test'
+    jobs:
+      - job: test
+        dependsOn: build
+        steps:
+          - script: 
+              echo 'All test cases passes'
+            displayName: 'Unit test'
+      
+      - deployment: deployToDev
+        dependsOn: test
+        displayName: 'Deploy Dev'
+        environment: Dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Deployed to Dev
+    
 
-  - job: test
-    dependsOn: build
-    steps:
-      - script: 
-          echo 'All test cases passes'
-        displayName: 'Unit test'
-  
-  - deployment: deployToDev
-    dependsOn: test
-    displayName: 'Deploy Dev'
-    environment: Dev
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-            - script: echo Deployed to Dev
-  
-  - deployment: deployToprod
-    displayName: 'Deploy Prod'
-    dependsOn: deployToDev
-    environment: Prod
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-            - script: echo Deployed to Prod
+  - stage: deploy
+    displayName: 'Deploy'
+    jobs:
+      - deployment: deployToprod
+        displayName: 'Deploy Prod'
+        dependsOn: deployToDev
+        environment: Prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Deployed to Prod
