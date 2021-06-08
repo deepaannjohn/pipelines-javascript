@@ -31,6 +31,7 @@ jobs:
         displayName: 'Unit test'
   
   - deployment: deployToDev
+    dependsOn: test
     displayName: 'Deploy Dev'
     environment: Dev
     strategy:
@@ -41,6 +42,7 @@ jobs:
   
   - deployment: deployToprod
     displayName: 'Deploy Prod'
+    dependsOn: deployToDev
     environment: Prod
     strategy:
       runOnce:
