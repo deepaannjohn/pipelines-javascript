@@ -36,6 +36,13 @@ stages:
               echo 'All test cases passes'
             displayName: 'Unit test'
       
+
+    
+
+  - stage: deploy
+    dependsOn: test
+    displayName: 'Deploy'
+    jobs:
       - deployment: deployToDev
         displayName: 'Deploy Dev'
         environment: Dev
@@ -44,12 +51,6 @@ stages:
             deploy:
               steps:
                 - script: echo Deployed to Dev
-    
-
-  - stage: deploy
-    dependsOn: test
-    displayName: 'Deploy'
-    jobs:
       - deployment: deployToprod
         displayName: 'Deploy Prod'
         environment: Prod
