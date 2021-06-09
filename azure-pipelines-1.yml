@@ -12,14 +12,6 @@ stages:
   - stage: deploy
     displayName: 'Deploy'
     jobs:
-      - deployment: deployToDev
-        displayName: 'Deploy Dev'
-        environment: Dev
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - script: echo Deployed to Dev
       - deployment: deployToprod
         displayName: 'Deploy Prod'
         environment: Prod
