@@ -1,0 +1,68 @@
+trigger: none
+
+resources:
+  pipelines:
+    - pipeline: mySourcePipeline
+      source: deepaannjohn.pipelines-javascript
+      trigger:
+        branches:
+        - master
+
+stages:
+  - stage: build
+    displayName: 'Build'
+    jobs:
+    - job: build
+      steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '10.x'
+          displayName: 'Install Node.js'
+
+        - script: |
+            npm install
+            npm run build
+          displayName: 'npm install and build'
+
+
+        - task: CopyFiles@2
+          inputs:
+            targetFolder: $(Build.ArtifactStagingDirectory)
+        - task: PublishBuildArtifacts@1
+          inputs:
+            pathToPublish: $(Build.ArtifactStagingDirectory)
+            artifactName: MyBuildOutputs
+    
+  - stage: test
+    dependsOn: build
+    displayName: 'Test'
+    jobs:
+      - job: test
+        steps:
+          - script: 
+              echo 'All test cases passes'
+            displayName: 'Unit test'
+      
+
+    
+
+  - stage: deploy
+    dependsOn: test
+    displayName: 'Deploy'
+    jobs:
+      - deployment: deployToDev
+        displayName: 'Deploy Dev'
+        environment: Dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Deployed to Dev
+      - deployment: deployToprod
+        displayName: 'Deploy Prod'
+        environment: Prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Deployed to Prod
