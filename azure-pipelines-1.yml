@@ -43,14 +43,22 @@ stages:
     
 
   - stage: deploy
+    
     condition: eq(variables.shouldRun, 'deploy')
     displayName: 'Deploy'
     jobs:
       - deployment: deployToDev
         displayName: 'Deploy Dev'
+        
         environment: Dev
         strategy:
           runOnce:
             deploy:
+
+
+              
               steps:
+                - download: previous
+                  artifact: MyBuildOutputs
+
                 - script: echo Deployed to Dev
