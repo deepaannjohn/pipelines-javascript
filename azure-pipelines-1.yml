@@ -31,7 +31,6 @@ stages:
             artifactName: MyBuildOutputs
     
   - stage: test
-    dependsOn: build
     displayName: 'Test'
     jobs:
       - job: test
@@ -45,7 +44,6 @@ stages:
 
   - stage: deploy
     condition: eq('${{ variables.shouldRun}}', 'deploy')
-    dependsOn: test
     displayName: 'Deploy'
     jobs:
       - deployment: deployToDev
