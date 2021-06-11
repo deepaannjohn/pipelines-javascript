@@ -5,7 +5,7 @@ trigger:
 
 stages:
   - stage: build
-    condition: eq('${{ variables.shouldRun}}', 'build')
+    condition: eq(variables.shouldRun, 'build')
     displayName: 'Build'
     jobs:
     - job: build
@@ -43,7 +43,7 @@ stages:
     
 
   - stage: deploy
-    condition: eq('${{ variables.shouldRun}}', 'deploy')
+    condition: eq(variables.shouldRun, 'deploy')
     displayName: 'Deploy'
     jobs:
       - deployment: deployToDev
