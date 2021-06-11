@@ -1,6 +1,6 @@
 variables:
 - name: shouldRun
-  value: 'yes'
+  value: ' '
 
 trigger:
 - master
@@ -11,7 +11,7 @@ stages:
     displayName: 'Build'
     jobs:
     - job: build
-      condition: eq('${{ variables.shouldRun}}', 'yes')
+      condition: eq('${{ variables.shouldRun}}', 'build')
       steps:
         - task: NodeTool@0
           inputs:
@@ -46,7 +46,7 @@ stages:
     
 
   - stage: deploy
-    condition: eq('${{ variables.shouldRun}}', 'yes')
+    condition: eq('${{ variables.shouldRun}}', 'deploy')
     dependsOn: test
     displayName: 'Deploy'
     jobs:
