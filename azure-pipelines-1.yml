@@ -1,6 +1,6 @@
 variables:
 - name: shouldRun
-  value: 'no'
+  value: 'yes'
 
 trigger:
 - master
