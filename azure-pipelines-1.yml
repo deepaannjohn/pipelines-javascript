@@ -1,6 +1,4 @@
-variables:
-- name: shouldRun
-  value: ' '
+
 
 trigger:
 - master
