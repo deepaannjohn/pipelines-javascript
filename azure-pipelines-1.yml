@@ -5,11 +5,11 @@ trigger:
 
 stages:
   - stage: build
-
+    condition: eq('${{ variables.shouldRun}}', 'build')
     displayName: 'Build'
     jobs:
     - job: build
-      condition: eq('${{ variables.shouldRun}}', 'build')
+      
       steps:
         - task: NodeTool@0
           inputs:
