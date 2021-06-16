@@ -44,10 +44,25 @@ stages:
     
 
   - stage: deploy
+
+  
     
     condition: eq(variables.shouldRun, 'deploy')
     displayName: 'Deploy'
     jobs:
+      - job: 
+        steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: specific
+              project: 'pipelines-javascript'
+              pipeline: 'pipelines-javascript'
+              buildVersionToDownload: latest
+              downloadType: 'single'
+              artifactName: 'MyBuildOutputs'
+              downloadPath: '$(System.ArtifactsDirectory)'
+
+        
       - deployment: deployToDev
         displayName: 'Deploy Dev'
         
@@ -63,3 +78,4 @@ stages:
                   artifact: MyBuildOutputs
 
                 - script: echo Deployed to Dev
+
