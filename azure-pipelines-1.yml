@@ -60,7 +60,7 @@ stages:
               
               buildVersionToDownload: specific
               buildId: 390
-              #downloadType: 'single' # Choose whether to download a single artifact or all artifacts of a specific build. Options: single, specific
+              downloadType: specific
               #artifactName: # Required when downloadType == Single
               #itemPattern: '**' # Optional
               downloadPath: '$(System.ArtifactsDirectory)' 
