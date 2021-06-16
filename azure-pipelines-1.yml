@@ -57,7 +57,7 @@ stages:
               buildType: specific
               project: 'deepaannjohn/pipelines-javascript'
               pipeline: '20'
-              buildVersionToDownload: latest
+              buildVersionToDownload: 'latest'
               downloadType: 'single'
               artifactName: 'MyBuildOutputs'
               downloadPath: '$(System.ArtifactsDirectory)'
