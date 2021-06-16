@@ -55,8 +55,8 @@ stages:
           - task: DownloadBuildArtifacts@0
             inputs:
               buildType: specific
-              project: 'pipelines-javascript'
-              pipeline: 'pipelines-javascript'
+              project: 'deepaannjohn/pipelines-javascript'
+              pipeline: 'deepaannjohn.pipelines-javascript (1)'
               buildVersionToDownload: latest
               downloadType: 'single'
               artifactName: 'MyBuildOutputs'
