@@ -61,22 +61,23 @@ stages:
               runVersion: specific
               runBranch: 'refs/heads/master' 
               runId: 385
-              #tags: # Optional
-              #artifact: # Optional
-              #patterns: '**' # Optional
               path: '$(Pipeline.Workspace)'
-              
+              project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
+              pipeline: '20'
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: specific
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
               pipeline: '20'
               
-              
-              
-              
-              # downloadType: 'single'
-              # artifactName: 'MyBuildOutputs'
-              # downloadPath: '$(System.ArtifactsDirectory)'
-
-        
+              buildVersionToDownload: specific
+              buildId: 390
+              #downloadType: 'single' # Choose whether to download a single artifact or all artifacts of a specific build. Options: single, specific
+              #artifactName: # Required when downloadType == Single
+              #itemPattern: '**' # Optional
+              downloadPath: '$(System.ArtifactsDirectory)' 
+              #parallelizationLimit: '8' # Optional
+                  
       - deployment: deployToDev
         displayName: 'Deploy Dev'
         
@@ -88,8 +89,8 @@ stages:
 
               
               steps:
-                - download: previous
-                  artifact: MyBuildOutputs
+                
 
                 - script: echo Deployed to Dev
+                - script: ls 
 
