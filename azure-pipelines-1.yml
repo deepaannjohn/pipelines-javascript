@@ -60,7 +60,7 @@ stages:
               pipeline: '20'
               buildVersionToDownload: specific
               
-              buildId: 20210616.1
+              buildId: 408
               
               downloadType: 'single'
               artifactName: 'MyBuildOutputs'
