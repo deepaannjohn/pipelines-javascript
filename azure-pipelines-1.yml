@@ -52,19 +52,29 @@ stages:
     jobs:
       - job: 
         steps:
-          - task: DownloadBuildArtifacts@0
+          - task: DownloadPipelineArtifact@2
             inputs:
+              source: specific
               
-              buildType: specific
+              
+              
+              runVersion: specific
+              runBranch: 'refs/heads/master' 
+              runId: 385
+              #tags: # Optional
+              #artifact: # Optional
+              #patterns: '**' # Optional
+              path: '$(Pipeline.Workspace)'
+              
               project: 'deepaannjohn/pipelines-javascript'
               pipeline: '20'
-              buildVersionToDownload: specific
               
-              buildId: 408
               
-              downloadType: 'single'
-              artifactName: 'MyBuildOutputs'
-              downloadPath: '$(System.ArtifactsDirectory)'
+              
+              
+              # downloadType: 'single'
+              # artifactName: 'MyBuildOutputs'
+              # downloadPath: '$(System.ArtifactsDirectory)'
 
         
       - deployment: deployToDev
