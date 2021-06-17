@@ -53,8 +53,8 @@ stages:
       - job: 
         steps:
           - script: echo ${{ variables.pipelineid1 }} 
+          - script: echo $(pipelineid1) 
           - script: echo $(variables.pipelineid1) 
-          - script: echo $[variables.pipelineid1]
           - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'specific'
