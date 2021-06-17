@@ -63,7 +63,7 @@ stages:
               artifactName: 'MyBuildOutputs'
               targetPath: '$(Pipeline.Workspace)'
       
-          - script: echo ls $(Pipeline.Workspace)
+          - script: cd $(Pipeline.Workspace) && ls
           - script: ls -ltr
           - script: ls
 
