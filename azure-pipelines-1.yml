@@ -53,19 +53,16 @@ stages:
       - job: 
         steps:
           
-      
           - task: DownloadPipelineArtifact@2
             inputs:
-              source: specific
-              
-              
-              
-              runVersion: specific
-              runBranch: 'refs/heads/master' 
-              runId: 395
-              path: '$(Pipeline.Workspace)'
+              buildType: 'specific'
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
-              pipeline: '20'
+              definition: '20'
+              buildVersionToDownload: 'specific'
+              pipelineId: '395'
+              artifactName: 'MyBuildOutputs'
+              targetPath: '$(Pipeline.Workspace)'
+      
           - script: echo ls $(Pipeline.Workspace)
           - script: ls /home/vsts/work/1/MyBuildOutputs
           - script: ls
