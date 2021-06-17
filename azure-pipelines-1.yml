@@ -52,7 +52,7 @@ stages:
     jobs:
       - job: 
         steps:
-          
+          - script: echo $(variables.pipelineid1
           - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'specific'
