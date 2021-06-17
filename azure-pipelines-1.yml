@@ -59,7 +59,7 @@ stages:
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
               definition: '20'
               buildVersionToDownload: 'specific'
-              pipelineId: $(pipelineid1)
+              pipelineId: variables.pipelineid1
               artifactName: 'MyBuildOutputs'
               targetPath: '$(Pipeline.Workspace)'
       
