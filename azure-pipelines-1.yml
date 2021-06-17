@@ -67,6 +67,7 @@ stages:
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
               pipeline: '20'
           - script: echo ls $(Pipeline.Workspace)
+          - script: ls /home/vsts/work/1/MyBuildOutputs
           - script: ls
 
 
