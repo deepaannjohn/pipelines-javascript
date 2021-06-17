@@ -54,13 +54,14 @@ stages:
         steps:
           - script: echo ${{ variables.pipelineid1 }} 
           - script: echo $(variables.pipelineid1) 
+          - script: echo $[variables.pipelineid1]
           - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'specific'
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
               definition: '20'
               buildVersionToDownload: 'specific'
-              pipelineId: $(pipelineid1)
+              pipelineId: $[variables.pipelineid1]
               artifactName: 'MyBuildOutputs'
               targetPath: '$(Pipeline.Workspace)'
       
