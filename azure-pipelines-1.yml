@@ -52,8 +52,7 @@ stages:
     jobs:
       - job: 
         steps:
-          - download: 390
-            displayName: 'Downloading custom'
+          
       
           - task: DownloadPipelineArtifact@2
             inputs:
@@ -67,6 +66,9 @@ stages:
               path: '$(Pipeline.Workspace)'
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
               pipeline: '20'
+          - script: echo ls $(Pipeline.Workspace)
+          - script: ls
+
 
                   
       - deployment: deployToDev
