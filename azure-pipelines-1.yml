@@ -52,6 +52,8 @@ stages:
     jobs:
       - job: 
         steps:
+          - download: 390
+            displayName: 'Downloading custom'
       
           - task: DownloadPipelineArtifact@2
             inputs:
