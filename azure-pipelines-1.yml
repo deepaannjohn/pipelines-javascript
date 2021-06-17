@@ -52,19 +52,7 @@ stages:
     jobs:
       - job: 
         steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              buildType: specific
-              project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
-              pipeline: '20'
-              
-              buildVersionToDownload: specific
-              buildId: 390
-              downloadType: specific
-              #artifactName: # Required when downloadType == Single
-              #itemPattern: '**' # Optional
-              downloadPath: '$(System.ArtifactsDirectory)' 
-              #parallelizationLimit: '8' # Optional
+      
           - task: DownloadPipelineArtifact@2
             inputs:
               source: specific
