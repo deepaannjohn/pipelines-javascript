@@ -13,7 +13,7 @@ stages:
             inputs:
               buildType: 'specific'
               project: 'dfc7d9bc-d749-475a-ae1b-113601aff5ce'
-              definition: '20'
+              definition: '22'
               buildVersionToDownload: 'specific'
               pipelineId: $(pipelineid1)
               artifactName: 'MyBuildOutputs'
