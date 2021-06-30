@@ -3,7 +3,6 @@ trigger:
 
 stages:
   - stage: build
-    condition: eq(variables.shouldRun, 'build')
     displayName: 'Build'
     jobs:
     - job: build     
@@ -24,7 +23,6 @@ stages:
             pathToPublish: $(Build.ArtifactStagingDirectory)
             artifactName: MyBuildOutputs
   - stage: test
-    condition: eq(variables.shouldRun, 'test')
     displayName: 'Test'
     jobs:
       - job: test
@@ -33,7 +31,6 @@ stages:
               echo 'All test cases passes'
             displayName: 'Unit test'   
   - stage: deploy
-    condition: eq(variables.shouldRun, 'deploy')
     displayName: 'Deploy'
     jobs:
       - job: 
