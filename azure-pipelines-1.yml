@@ -57,4 +57,13 @@ stages:
             deploy:
               steps:
                 - script: echo Deployed to Dev
+                - script: ls
+      - deployment: deployToProd
+        displayName: 'Deploy Prod'
+        environment: Prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Deployed to Prod
                 - script: ls 
